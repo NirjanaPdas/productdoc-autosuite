@@ -1,0 +1,15 @@
+# Never upload secrets
+.env
+backend/.env
+
+# Python cache
+__pycache__/
+
+# Database file
+productdoc.db
+
+# Streamlit cache
+.streamlit/
+
+# Virtual environment (if you create later)
+venv/
