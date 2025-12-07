@@ -8,6 +8,8 @@ from sqlalchemy.orm import Session
 
 from .database import SessionLocal, engine, Base
 from . import models
+from .utils import safe_generate
+
 
 # --------- INIT ---------
 load_dotenv()
@@ -71,13 +73,17 @@ def generate(data: dict, db: Session = Depends(get_db)):
 
     output = {}
 
-    for key, prompt in prompts.items():
-        # ⚠️ This will fail if you have no OpenAI credit – that's okay for now.
-        result = client.chat.completions.create(
+    # helper function for calling OpenAI
+    def call_openai(prompt: str) -> str:
+        return client.chat.completions.create(
             model="gpt-4.1-mini",
             messages=[{"role": "user", "content": prompt}]
-        )
-        output[key] = result.choices[0].message.content
+        ).choices[0].message.content
+
+    for key, prompt in prompts.items():
+        # SAFE: if OpenAI fails (no credit / bad key), we still return a mock response
+        output[key] = safe_generate(call_openai, prompt)
+
 
     # Save product
     product = models.Product(
