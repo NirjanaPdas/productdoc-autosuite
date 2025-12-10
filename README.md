@@ -1,14 +1,14 @@
 # ⚡ ProductDoc AutoSuite  
-AI-powered product documentation generator with a modular FastAPI backend and a Streamlit-based frontend.
+AI-powered product documentation generator with a modular FastAPI backend and a Streamlit frontend.
 
 ProductDoc AutoSuite helps teams quickly generate:
 - Product requirement documents (PRDs)
 - Landing page content
 - FAQs
-- Short video scripts
 - Custom marketing copy
 
-The app uses OpenAI models and provides a clean developer experience with modular APIs, user login, and history storage.
+Built using OpenAI models, with clean modular architecture, user authentication, and history tracking.
+ 
 
 ---
 
@@ -16,14 +16,13 @@ The app uses OpenAI models and provides a clean developer experience with modula
 
 ### 🔹 **1. Streamlit Frontend**
 - Clean UI for writing a short product brief
-- Adjustable depth slider (detail level)
+- Adjustable depth slider for level of detail
 - History panel for last 10 generations
-- Developer bypass mode (auto-login for devs)
-
+- Responsive layout for easy demo and usage
 ### 🔹 **2. FastAPI Backend**
 - Endpoints for:
-  - `/generate` – generate PRD, FAQ, copy, scripts  
-  - `/signup` – create an account  
+  - `/generate` – generate PRD, FAQ, copy, scripts and marketing copy
+  - `/signup` –  Register new users
   - `/login` – authenticate users  
   - `/history` – fetch last 10 generations  
 - Modular architecture:
@@ -36,27 +35,12 @@ The app uses OpenAI models and provides a clean developer experience with modula
 ### 🔹 **3. User Authentication**
 - Secure password hashing using `bcrypt`
 - SQLite storage for users + generation history
-- JWT-free simple token/session pattern (for demo scale)
+- Simple token-based session flow (suitable for demo and learning environments)
 
-### 🔹 **4. Developer Mode**
-The frontend allows a special mode if defined in `.env`:
-
-ADMIN_BYPASS=yes
-ADMIN_EMAIL=your@email.com
-
-yaml
-Copy code
-
-This logs the developer in automatically and bypasses auth when the backend is offline.
-
-### 🔹 **5. Graceful Offline Mode**
-If backend is unreachable:
-- The frontend switches to *demo generation outputs*
-- History becomes unavailable
-- The UI continues to work for demonstration
-
-This ensures the project can be showcased even without full server deployment.
-
+ ### 🔹**4. AI Integration**
+ - OpenAI GPT models for all content generation
+ - Centralized prompt templates for consistent outputs
+ 
 ---
 
 ## 📁 Project Structure
@@ -64,109 +48,82 @@ This ensures the project can be showcased even without full server deployment.
 productdoc_autosuite/
 │
 ├── backend/
-│ ├── main.py
-│ ├── database.py
-│ ├── models.py
-│ ├── prompts.py
-│ ├── utils.py
-│ └── pycache/
+│   ├── main.py            # FastAPI entry point
+│   ├── database.py        # SQLite + SQLAlchemy setup
+│   ├── models.py          # ORM models
+│   ├── prompts.py         # Prompt templates for generation
+│   ├── utils.py           # Helper utilities
+│   └── routers/           # API route handlers (optional if used)
 │
 ├── frontend/
-│ ├── app.py (Streamlit app)
+│   ├── app.py             # Streamlit frontend app
+│   └── requirements.txt   # Frontend dependencies
 │
-├── requirements.txt
-├── productdoc.db
+├── productdoc.db          # SQLite database
+├── .env.example           # Environment variable template
 ├── .gitignore
-├── .env.example
 └── README.md
-
-yaml
-Copy code
 
 ---
 
 ## ⚙️ Installation & Setup
 
-### 1️⃣ Clone the repo
-```bash
+### 🔹 **1.Clone the repository**
 git clone https://github.com/your-username/productdoc-autosuite
 cd productdoc-autosuite
-2️⃣ Install requirements
-(You do NOT need pinned versions — normal install works fine.)
 
-bash
-Copy code
+### 🔹 **2.Install dependencies**
 pip install -r requirements.txt
-3️⃣ Create a .env file
-env
-Copy code
+
+### 🔹 **3.Create a .env file**
 BACKEND_URL=http://localhost:8000
 OPENAI_API_KEY=your_key_here
 
-# Optional dev auto-login
-ADMIN_BYPASS=yes
-ADMIN_EMAIL=youremail@example.com
-4️⃣ Run backend (FastAPI)
-bash
-Copy code
+### 🔹 **4.Run the backend**
 cd backend
 uvicorn main:app --reload --port 8000
-5️⃣ Run frontend (Streamlit)
-bash
-Copy code
+
+### 🔹 **5.Run the frontend**
 cd frontend
 streamlit run app.py
-🔐 Authentication Flow
-User signs up (email + password)
 
-Passwords are hashed using bcrypt
+---
 
-User logs in
+## 🔐 Authentication Flow
+- User signs up with email + password
+- Passwords are securely hashed using bcrypt
+- Login returns a simple session token
+- User ID is attached to authenticated requests
+- User ID is attached to authenticated requests
 
-Authenticated requests include the user’s ID
+---
 
-History is tied to the specific user
+## 🧠 Tech Stack
+**Frontend**
+- Streamlit
+- Python
 
-Developer mode bypasses login (via .env)
+**Backend**
+- FastAPI
+- SQLAlchemy
+- SQLite
 
-🧠 Tech Stack
-Frontend
-Streamlit
+**AI**
+- OpenAI GPT models
 
-Python
+**Security**
+- bcrypt
+- Environment variables via .env
 
-Backend
-FastAPI
+---
 
-SQLAlchemy
+## 🤝 Contributions
 
-SQLite
+Contributions are welcome.
+For major changes, please open an issue to discuss your proposal.
+ 
 
-AI
-OpenAI GPT models
 
-Security
-bcrypt
 
-.env environment variables
-
-Git ignored secrets
-
-📌 Why this project is strong for hiring
-This project demonstrates:
-
-✔ Full-stack ability (API + frontend)
-✔ Modular backend architecture
-✔ Authentication system (bcrypt + SQLite)
-✔ Prompt engineering
-✔ Real AI integration using OpenAI
-✔ Clean code structure
-✔ Modern frameworks: FastAPI + Streamlit
-✔ Deployable & scalable structure
-
-Perfect for SDE, AI Engineer, ML Engineer, and Full-Stack Python roles.
-
-🤝 Contributions
-Pull requests are welcome.
-For major changes, please open an issue first to discuss.
+ 
 
