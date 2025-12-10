@@ -1,3 +1,10 @@
+## 🖼️ UI Preview
+
+![ProductDoc UI](assets/ui_preview.png)
+
+
+---
+
 # ⚡ ProductDoc AutoSuite  
 AI-powered product documentation generator with a modular FastAPI backend and a Streamlit frontend.
 
