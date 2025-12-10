@@ -19,20 +19,22 @@ Built using OpenAI models, with clean modular architecture, user authentication,
 - Adjustable depth slider for level of detail
 - History panel for last 10 generations
 - Responsive layout for easy demo and usage
-### ⚙️ 2. FastAPI Backend
+ 
+ ### ⚙️ 2. FastAPI Backend
 
-> #### 🔌 Endpoints  
-> - `GET /generate` → Generates PRD, FAQ, copy, scripts  
-> - `POST /signup` → User registration  
-> - `POST /login` → Authentication  
-> - `GET /history` → Last 10 generations  
->
-> #### 🧩 Modular Architecture  
-> - **main.py** → API router & FastAPI app  
-> - **database.py** → SQLite + SQLAlchemy configuration  
-> - **models.py** → ORM models  
-> - **prompts.py** → All prompt templates  
-> - **utils.py** → Common utilities  
+**Endpoints**
+- `/generate` – generate PRD, FAQ, scripts, marketing copy  
+- `/signup` – register users  
+- `/login` – authenticate users  
+- `/history` – recent 10 generations  
+
+**Modular Architecture**
+- `main.py` → API routers  
+- `database.py` → SQLite + SQLAlchemy DB  
+- `models.py` → ORM models  
+- `prompts.py` → prompt templates  
+- `utils.py` → helper utilities  
+
 
 
 ### 🔹 **3. User Authentication**
