@@ -58,6 +58,8 @@ Built using OpenAI models, with clean modular architecture, user authentication,
  <pre>
 productdoc_autosuite/
 │
+├── assets
+|    ├── ui_preview.png
 ├── backend/
 │   ├── main.py
 │   ├── database.py
